@@ -112,6 +112,7 @@ export default {
     confirm: 'Confirm',
     loading: 'loading',
     disable: 'disable',
+    enable: 'enable',
     createtime: 'createtime',
     lastmodifytime: 'lastmodifytime'
   },

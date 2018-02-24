@@ -9,7 +9,7 @@ for (let i = 0; i < count; i++) {
     id: '@increment',
     name: '@first',
     code: '@first',
-    'status|1': [0, 1],
+    'status|1': ['0', '1'],
     memo: '@first',
     createtime: +Mock.Random.date('T'),
     lastmodifytime: +Mock.Random.date('T')
@@ -37,7 +37,7 @@ export default {
     id: '1',
     name: '超级管理员',
     code: 'ADMIN:SUPER',
-    'status|1': 1,
+    status: '1',
     memo: '测试超级管理员',
     createtime: +new Date(),
     lastmodifytime: +new Date()

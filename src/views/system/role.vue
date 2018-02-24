@@ -51,7 +51,10 @@
         <template slot-scope="scope">
           <el-button type="primary" size="mini" @click="handleUpdate(scope.row)">{{$t('table.edit')}}</el-button>
           <el-button type="success" size="mini" @click="handleUpdate(scope.row)">{{$t('role.auth')}}</el-button>
-          <el-button type="danger" size="mini" @click="handleUpdate(scope.row)">{{$t('table.disable')}}</el-button>
+          <el-button v-if="scope.row.status==='0'" size="mini" type="success" @click="handleModifyStatus(scope.row,'1')">{{$t('table.enable')}}
+          </el-button>
+          <el-button v-if="scope.row.status==='1'" size="mini" type="danger" @click="handleModifyStatus(scope.row,'0')">{{$t('table.disable')}}
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -69,9 +72,9 @@
   import { parseTime } from '@/utils'
 
   const statusOptions = [
-    { key: -1, display_name: '全部' },
-    { key: 0, display_name: '禁用' },
-    { key: 1, display_name: '正常' }
+    { key: '', display_name: '全部' },
+    { key: '0', display_name: '禁用' },
+    { key: '1', display_name: '正常' }
   ]
 
   export default {
@@ -86,7 +89,7 @@
         listLoading: true,
         listQuery: {
           page: 1,
-          limit: 20,
+          limit: 10,
           name: undefined,
           status: undefined
         },
@@ -119,7 +122,7 @@
     },
     filters: {
       statusFilter(status) {
-        for (const option of statusOptions) {debugger
+        for (const option of statusOptions) {
           if (option.key === status) {
             return option.display_name
           }
@@ -149,6 +152,13 @@
       handleCurrentChange(val) {
         this.listQuery.page = val
         this.getList()
+      },
+      handleModifyStatus(row, status) {
+        this.$message({
+          message: '操作成功',
+          type: 'success'
+        })
+        row.status = status
       },
       resetTemp() {
         this.temp = {
