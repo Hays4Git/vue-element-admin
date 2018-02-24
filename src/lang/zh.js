@@ -111,7 +111,9 @@ export default {
     cancel: '取 消',
     confirm: '确 定',
     loading: '加载中...',
-    disable: '禁用'
+    disable: '禁用',
+    createtime: '创建时间',
+    lastmodifytime: '最后修改时间'
   },
   errorLog: {
     tips: '请点击右上角bug小图标',

@@ -2,30 +2,22 @@ import request from '@/utils/request'
 
 export function fetchList(query) {
   return request({
-    url: '/article/list',
+    url: '/role/list',
     method: 'get',
     params: query
   })
 }
 
-export function fetchArticle() {
+export function fetchRole() {
   return request({
-    url: '/article/detail',
+    url: '/role/detail',
     method: 'get'
-  })
-}
-
-export function fetchPv(pv) {
-  return request({
-    url: '/article/pv',
-    method: 'get',
-    params: { pv }
   })
 }
 
 export function createArticle(data) {
   return request({
-    url: '/article/create',
+    url: '/role/create',
     method: 'post',
     data
   })
@@ -33,7 +25,7 @@ export function createArticle(data) {
 
 export function updateArticle(data) {
   return request({
-    url: '/article/update',
+    url: '/role/update',
     method: 'post',
     data
   })

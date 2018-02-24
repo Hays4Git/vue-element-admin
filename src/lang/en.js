@@ -111,7 +111,9 @@ export default {
     cancel: 'Cancel',
     confirm: 'Confirm',
     loading: 'loading',
-    disable: 'disable'
+    disable: 'disable',
+    createtime: 'createtime',
+    lastmodifytime: 'lastmodifytime'
   },
   errorLog: {
     tips: 'Please click the bug icon in the upper right corner',
