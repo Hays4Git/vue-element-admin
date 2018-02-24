@@ -46,7 +46,11 @@ export default {
     exportZip: 'Export Zip',
     theme: '换肤',
     clipboardDemo: 'Clipboard',
-    i18n: '国际化'
+    i18n: '国际化',
+
+    system: '系统管理',
+    role: '角色管理',
+    user: '用户管理'
   },
   navbar: {
     logOut: '退出登录',
@@ -105,7 +109,9 @@ export default {
     draft: '草稿',
     delete: '删除',
     cancel: '取 消',
-    confirm: '确 定'
+    confirm: '确 定',
+    loading: '加载中...',
+    disable: '禁用'
   },
   errorLog: {
     tips: '请点击右上角bug小图标',
@@ -125,5 +131,12 @@ export default {
     change: '换肤',
     documentation: '换肤文档',
     tips: 'Tips: 它区别于 navbar 上的 theme-pick, 是两种不同的换肤方法，各自有不同的应用场景，具体请参考文档。'
+  },
+
+  role: {
+    name: '角色名称',
+    code: '角色代码',
+    memo: '备注',
+    auth: '授权'
   }
 }
