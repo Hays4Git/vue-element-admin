@@ -11,8 +11,8 @@ for (let i = 0; i < count; i++) {
     code: '@first',
     'status|1': ['0', '1'],
     memo: '@first',
-    createtime: +Mock.Random.date('T'),
-    lastmodifytime: +Mock.Random.date('T')
+    createTime: +Mock.Random.date('T'),
+    lastModifyTime: +Mock.Random.date('T')
   }))
 }
 
@@ -39,8 +39,8 @@ export default {
     code: 'ADMIN:SUPER',
     status: '1',
     memo: '测试超级管理员',
-    createtime: +new Date(),
-    lastmodifytime: +new Date()
+    createTime: +new Date(),
+    lastModifyTime: +new Date()
   }),
   createRole: () => ({
     data: 'success'

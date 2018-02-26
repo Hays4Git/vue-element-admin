@@ -113,8 +113,8 @@ export default {
     loading: 'loading',
     disable: 'disable',
     enable: 'enable',
-    createtime: 'createtime',
-    lastmodifytime: 'lastmodifytime'
+    createTime: 'createTime',
+    lastModifyTime: 'lastModifyTime'
   },
   errorLog: {
     tips: 'Please click the bug icon in the upper right corner',

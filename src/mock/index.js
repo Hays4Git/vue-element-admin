@@ -2,6 +2,7 @@ import Mock from 'mockjs'
 import loginAPI from './login'
 import articleAPI from './article'
 import roleAPI from './role'
+import userAPI from './user'
 import remoteSearchAPI from './remoteSearch'
 import transactionAPI from './transaction'
 
@@ -32,4 +33,10 @@ Mock.mock(/\/role\/list/, 'get', roleAPI.getList)
 Mock.mock(/\/role\/detail/, 'get', roleAPI.getRole)
 Mock.mock(/\/role\/create/, 'post', roleAPI.createRole)
 Mock.mock(/\/role\/update/, 'post', roleAPI.updateRole)
+
+// 用户相关
+Mock.mock(/\/user\/list/, 'get', userAPI.getList)
+Mock.mock(/\/user\/detail/, 'get', userAPI.getUser)
+Mock.mock(/\/user\/create/, 'post', userAPI.createUser)
+Mock.mock(/\/user\/update/, 'post', userAPI.updateUser)
 export default Mock

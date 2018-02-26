@@ -37,14 +37,14 @@
           <span>{{scope.row.memo}}</span>
         </template>
       </el-table-column>
-      <el-table-column width="150px" align="center" :label="$t('table.createtime')">
+      <el-table-column width="150px" align="center" :label="$t('table.createTime')">
         <template slot-scope="scope">
-          <span>{{scope.row.createtime | parseTime('{y}-{m}-{d} {h}:{i}')}}</span>
+          <span>{{scope.row.createTime | parseTime('{y}-{m}-{d} {h}:{i}')}}</span>
         </template>
       </el-table-column>
-      <el-table-column width="150px" align="center" :label="$t('table.lastmodifytime')">
+      <el-table-column width="150px" align="center" :label="$t('table.lastModifyTime')">
         <template slot-scope="scope">
-          <span>{{scope.row.lastmodifytime | parseTime('{y}-{m}-{d} {h}:{i}')}}</span>
+          <span>{{scope.row.lastModifyTime | parseTime('{y}-{m}-{d} {h}:{i}')}}</span>
         </template>
       </el-table-column>
       <el-table-column align="center" :label="$t('table.actions')" width="230" class-name="small-padding fixed-width">
@@ -188,8 +188,8 @@
           name: undefined,
           code: undefined,
           status: undefined,
-          createtime: new Date(),
-          lastmodifytime: new Date(),
+          createTime: new Date(),
+          lastModifyTime: new Date(),
           memo: undefined
         }
       },

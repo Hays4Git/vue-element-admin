@@ -113,8 +113,8 @@ export default {
     loading: '加载中...',
     disable: '禁用',
     enable: '启用',
-    createtime: '创建时间',
-    lastmodifytime: '最后修改时间'
+    createTime: '创建时间',
+    lastModifyTime: '最后修改时间'
   },
   errorLog: {
     tips: '请点击右上角bug小图标',
