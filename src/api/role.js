@@ -15,7 +15,7 @@ export function fetchRole() {
   })
 }
 
-export function createArticle(data) {
+export function createRole(data) {
   return request({
     url: '/role/create',
     method: 'post',
@@ -23,7 +23,7 @@ export function createArticle(data) {
   })
 }
 
-export function updateArticle(data) {
+export function updateRole(data) {
   return request({
     url: '/role/update',
     method: 'post',

@@ -4,7 +4,7 @@
       <el-input @keyup.enter.native="handleFilter" style="width: 200px;" class="filter-item" :placeholder="$t('role.name')" v-model="listQuery.name">
       </el-input>
       <el-select clearable class="filter-item" style="width: 130px" v-model="listQuery.status" :placeholder="$t('table.status')">
-        <el-option v-for="item in statusOptions" :key="item.key" :label="item.display_name" :value="item.key">
+        <el-option v-for="item in statusQueryOptions" :key="item.key" :label="item.display_name" :value="item.key">
         </el-option>
       </el-select>
       <el-button class="filter-item" type="primary" v-waves icon="el-icon-search" @click="handleFilter">{{$t('table.search')}}</el-button>
@@ -63,19 +63,40 @@
       <el-pagination background @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="listQuery.page" :page-sizes="[10,20,30,50]" :page-size="listQuery.limit" layout="total, sizes, prev, pager, next, jumper" :total="total">
       </el-pagination>
     </div>
+
+    <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
+      <el-form :rules="rules" ref="dataForm" :model="temp" label-position="left" label-width="70px" style='width: 400px; margin-left:50px;'>
+        <el-form-item :label="$t('role.name')" prop="name">
+          <el-input v-model="temp.name"></el-input>
+        </el-form-item>
+        <el-form-item :label="$t('role.code')" prop="code">
+          <el-input v-model="temp.code"></el-input>
+        </el-form-item>
+        <el-form-item :label="$t('table.status')">
+          <el-select class="filter-item" v-model="temp.status" placeholder="Please select">
+            <el-option v-for="item in statusAddOptions" :key="item.key" :label="item.display_name" :value="item.key">
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item :label="$t('role.memo')">
+          <el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="Please input" v-model="temp.memo">
+          </el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">{{$t('table.cancel')}}</el-button>
+        <el-button v-if="dialogStatus=='create'" type="primary" @click="createData">{{$t('table.confirm')}}</el-button>
+        <el-button v-else type="primary" @click="updateData">{{$t('table.confirm')}}</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-  import { fetchList } from '@/api/role'
+  import { fetchList, createRole, updateRole } from '@/api/role'
   import waves from '@/directive/waves'
   import { parseTime } from '@/utils'
-
-  const statusOptions = [
-    { key: '', display_name: '全部' },
-    { key: '0', display_name: '禁用' },
-    { key: '1', display_name: '正常' }
-  ]
+  import appconst from '@/utils/appconst'
 
   export default {
     directives: {
@@ -93,7 +114,8 @@
           name: undefined,
           status: undefined
         },
-        statusOptions: statusOptions,
+        statusQueryOptions: appconst.statusQueryOptions,
+        statusAddOptions: appconst.statusAddOptions,
         showReviewer: false,
         temp: {
           id: undefined,
@@ -122,7 +144,7 @@
     },
     filters: {
       statusFilter(status) {
-        for (const option of statusOptions) {
+        for (const option of appconst.statusQueryOptions) {
           if (option.key === status) {
             return option.display_name
           }
@@ -163,12 +185,12 @@
       resetTemp() {
         this.temp = {
           id: undefined,
-          importance: 1,
-          remark: '',
-          timestamp: new Date(),
-          title: '',
-          status: 'published',
-          type: ''
+          name: undefined,
+          code: undefined,
+          status: undefined,
+          createtime: new Date(),
+          lastmodifytime: new Date(),
+          memo: undefined
         }
       },
       handleCreate() {
@@ -179,6 +201,22 @@
           this.$refs['dataForm'].clearValidate()
         })
       },
+      createData() {
+        this.$refs['dataForm'].validate((valid) => {
+          if (valid) {
+            createRole(this.temp).then(() => {
+              this.list.unshift(this.temp)
+              this.dialogFormVisible = false
+              this.$notify({
+                title: '成功',
+                message: '创建成功',
+                type: 'success',
+                duration: 2000
+              })
+            })
+          }
+        })
+      },
       handleUpdate(row) {
         this.temp = Object.assign({}, row)
         this.temp.timestamp = new Date(this.temp.timestamp)
@@ -186,6 +224,29 @@
         this.dialogFormVisible = true
         this.$nextTick(() => {
           this.$refs['dataForm'].clearValidate()
+        })
+      },
+      updateData() {
+        this.$refs['dataForm'].validate((valid) => {
+          if (valid) {
+            const tempData = Object.assign({}, this.temp)
+            updateRole(tempData).then(() => {
+              for (const v of this.list) {
+                if (v.id === this.temp.id) {
+                  const index = this.list.indexOf(v)
+                  this.list.splice(index, 1, this.temp)
+                  break
+                }
+              }
+              this.dialogFormVisible = false
+              this.$notify({
+                title: '成功',
+                message: '更新成功',
+                type: 'success',
+                duration: 2000
+              })
+            })
+          }
         })
       }
     }
