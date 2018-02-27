@@ -15,6 +15,13 @@ export function fetchRole() {
   })
 }
 
+export function roleOptions() {
+  return request({
+    url: '/role/options',
+    method: 'get'
+  })
+}
+
 export function createRole(data) {
   return request({
     url: '/role/create',

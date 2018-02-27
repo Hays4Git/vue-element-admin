@@ -73,7 +73,7 @@
           <el-input v-model="temp.code"></el-input>
         </el-form-item>
         <el-form-item :label="$t('table.status')">
-          <el-select class="filter-item" v-model="temp.status" placeholder="Please select">
+          <el-select class="filter-item" v-model="temp.status" placeholder="Please select" style="width: 100%">
             <el-option v-for="item in statusAddOptions" :key="item.key" :label="item.display_name" :value="item.key">
             </el-option>
           </el-select>
@@ -148,6 +148,7 @@
       this.getList()
     },
     methods: {
+      parseTime: parseTime,
       getList() {
         this.listLoading = true
         fetchList(this.listQuery).then(response => {

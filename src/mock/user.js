@@ -23,7 +23,7 @@ export default {
   getList: config => {
     const { account, userName, status, page = 1, limit = 20 } = param2Obj(config.url)
 
-    let mockList = List.filter(item => {
+    const mockList = List.filter(item => {
       if (status && item.status !== status) return false
       if (account && item.account.indexOf(account) < 0) return false
       if (userName && item.userName.indexOf(userName) < 0) return false
@@ -43,7 +43,7 @@ export default {
     userName: '测试用户',
     nickName: '张三',
     operator: '张三',
-    role: roleNames[0],
+    role: [1, 2],
     status: '1',
     createTime: +new Date(),
     lastModifyTime: +new Date()

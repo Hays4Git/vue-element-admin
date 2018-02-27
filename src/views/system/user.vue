@@ -72,7 +72,7 @@
     </div>
 
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
-      <el-form :rules="rules" ref="dataForm" :model="temp" label-position="left" label-width="70px" style='width: 400px; margin-left:50px;'>
+      <el-form :rules="rules" ref="dataForm" :model="temp" label-position="left" label-width="80px" style='width: 400px; margin-left:50px;'>
         <el-form-item :label="$t('user.account')" prop="account">
           <el-input v-model="temp.account" placeholder="e.g. aihua.tan"></el-input>
         </el-form-item>
@@ -86,18 +86,18 @@
           <el-input v-model="temp.nickName"></el-input>
         </el-form-item>
         <el-form-item :label="$t('user.role')">
-          <el-select class="filter-item" v-model="temp.roleIds" placeholder="Please select">
-            <el-option v-for="item in roleOptions" :key="item.key" :label="item.display_name" :value="item.key">
+          <el-select multiple class="filter-item" v-model="temp.roleIds" placeholder="Please select" style="width: 100%">
+            <el-option v-for="item in roleOptions" :key="item.id" :label="item.name" :value="item.id">
             </el-option>
           </el-select>
         </el-form-item>
         <el-form-item :label="$t('table.status')">
-          <el-select class="filter-item" v-model="temp.status" placeholder="Please select">
+          <el-select class="filter-item" v-model="temp.status" placeholder="Please select"  style="width: 100%">
             <el-option v-for="item in statusAddOptions" :key="item.key" :label="item.display_name" :value="item.key">
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('user.memo')">
+        <el-form-item :label="$t('table.memo')">
           <el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="Please input" v-model="temp.memo">
           </el-input>
         </el-form-item>
@@ -113,6 +113,7 @@
 
 <script>
   import { fetchList, createUser, updateUser } from '@/api/user'
+  import { roleOptions } from '@/api/role'
   import waves from '@/directive/waves'
   import { parseTime } from '@/utils'
   import appconst from '@/utils/appconst'
@@ -144,6 +145,7 @@
           nickName: undefined,
           status: undefined,
           operator: undefined,
+          roleIds: undefined,
           createTime: new Date(),
           lastModifyTime: new Date()
         },
@@ -160,7 +162,8 @@
           timestamp: [{ type: 'date', required: true, message: 'timestamp is required', trigger: 'change' }],
           title: [{ required: true, message: 'title is required', trigger: 'blur' }]
         },
-        downloadLoading: false
+        downloadLoading: false,
+        roleOptions: null
       }
     },
     filters: {
@@ -176,12 +179,18 @@
       this.getList()
     },
     methods: {
+      parseTime: parseTime,
       getList() {
         this.listLoading = true
         fetchList(this.listQuery).then(response => {
           this.list = response.data.items
           this.total = response.data.total
           this.listLoading = false
+        })
+      },
+      initRoleOptions() {
+        roleOptions().then(response => {
+          this.roleOptions = response.data.roleOptions
         })
       },
       handleFilter() {
@@ -210,6 +219,7 @@
           userName: undefined,
           nickName: undefined,
           status: undefined,
+          roleIds: undefined,
           operator: undefined,
           createTime: new Date(),
           lastModifyTime: new Date()
@@ -219,6 +229,7 @@
         this.resetTemp()
         this.dialogStatus = 'create'
         this.dialogFormVisible = true
+        this.initRoleOptions()
         this.$nextTick(() => {
           this.$refs['dataForm'].clearValidate()
         })

@@ -3,6 +3,11 @@ import { param2Obj } from '@/utils'
 
 const List = []
 const count = 30
+const roleOptions = [
+  { id: 1, name: '超级管理员' },
+  { id: 2, name: '高级管理员' },
+  { id: 3, name: '营业员' }
+]
 
 for (let i = 0; i < count; i++) {
   List.push(Mock.mock({
@@ -20,7 +25,7 @@ export default {
   getList: config => {
     const { name, status, page = 1, limit = 20 } = param2Obj(config.url)
 
-    let mockList = List.filter(item => {
+    const mockList = List.filter(item => {
       if (status && item.status !== status) return false
       if (name && item.name.indexOf(name) < 0) return false
       return true
@@ -47,5 +52,8 @@ export default {
   }),
   updateRole: () => ({
     data: 'success'
+  }),
+  getOptions: () => ({
+    roleOptions
   })
 }
