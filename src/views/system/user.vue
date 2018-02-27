@@ -145,7 +145,7 @@
           nickName: undefined,
           status: undefined,
           operator: undefined,
-          roleIds: undefined,
+          roleIds: [],
           createTime: new Date(),
           lastModifyTime: new Date()
         },
@@ -158,12 +158,12 @@
         dialogPvVisible: false,
         pvData: [],
         rules: {
-          type: [{ required: true, message: 'type is required', trigger: 'change' }],
-          timestamp: [{ type: 'date', required: true, message: 'timestamp is required', trigger: 'change' }],
-          title: [{ required: true, message: 'title is required', trigger: 'blur' }]
+          account: [{ required: true, message: 'account is required', trigger: 'change' }],
+          password: [{ required: true, message: 'password is required', trigger: 'change' }],
+          status: [{ required: true, message: 'status is required', trigger: 'change' }]
         },
         downloadLoading: false,
-        roleOptions: null
+        roleOptions: []
       }
     },
     filters: {
@@ -219,13 +219,14 @@
           userName: undefined,
           nickName: undefined,
           status: undefined,
-          roleIds: undefined,
+          roleIds: [],
           operator: undefined,
           createTime: new Date(),
           lastModifyTime: new Date()
         }
       },
       handleCreate() {
+        debugger
         this.resetTemp()
         this.dialogStatus = 'create'
         this.dialogFormVisible = true
