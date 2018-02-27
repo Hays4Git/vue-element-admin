@@ -114,7 +114,10 @@ export default {
     disable: '禁用',
     enable: '启用',
     createTime: '创建时间',
-    lastModifyTime: '最后修改时间'
+    lastModifyTime: '最后修改时间',
+    operator: '操作员',
+    memo: '备注',
+    detail: '详情'
   },
   errorLog: {
     tips: '请点击右上角bug小图标',
@@ -139,7 +142,13 @@ export default {
   role: {
     name: '角色名称',
     code: '角色代码',
-    memo: '备注',
     auth: '授权'
+  },
+  user: {
+    account: '账号',
+    userName: '姓名',
+    nickName: '昵称',
+    role: '角色',
+    password: '密码'
   }
 }

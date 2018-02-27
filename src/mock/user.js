@@ -14,8 +14,8 @@ for (let i = 0; i < count; i++) {
     operator: Mock.Random.string('赵钱孙李字符串会从这里选择', 2, 4),
     'role|1-3': roleNames,
     'status|1': ['0', '1'],
-    createtime: +Mock.Random.date('T'),
-    lastmodifytime: +Mock.Random.date('T')
+    createTime: +Mock.Random.date('T'),
+    lastModifyTime: +Mock.Random.date('T')
   }))
 }
 
@@ -45,8 +45,8 @@ export default {
     operator: '张三',
     role: roleNames[0],
     status: '1',
-    createtime: +new Date(),
-    lastmodifytime: +new Date()
+    createTime: +new Date(),
+    lastModifyTime: +new Date()
   }),
   createRole: () => ({
     data: 'success'

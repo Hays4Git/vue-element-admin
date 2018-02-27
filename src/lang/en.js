@@ -114,7 +114,10 @@ export default {
     disable: 'disable',
     enable: 'enable',
     createTime: 'createTime',
-    lastModifyTime: 'lastModifyTime'
+    lastModifyTime: 'lastModifyTime',
+    operator: 'operator',
+    memo: 'memo',
+    detail: 'detail'
   },
   errorLog: {
     tips: 'Please click the bug icon in the upper right corner',
@@ -139,7 +142,13 @@ export default {
   role: {
     name: 'name',
     code: 'code',
-    memo: 'memo',
     auth: 'auth'
+  },
+  user: {
+    account: 'account',
+    userName: 'userName',
+    nickName: 'nickName',
+    role: 'role',
+    password: 'password'
   }
 }

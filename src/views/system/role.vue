@@ -32,7 +32,7 @@
           <span>{{scope.row.status | statusFilter}}</span>
         </template>
       </el-table-column>
-      <el-table-column min-width="150px" :label="$t('role.memo')">
+      <el-table-column min-width="150px" :label="$t('table.memo')">
         <template slot-scope="scope">
           <span>{{scope.row.memo}}</span>
         </template>
@@ -78,7 +78,7 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item :label="$t('role.memo')">
+        <el-form-item :label="$t('table.memo')">
           <el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="Please input" v-model="temp.memo">
           </el-input>
         </el-form-item>
@@ -116,15 +116,14 @@
         },
         statusQueryOptions: appconst.statusQueryOptions,
         statusAddOptions: appconst.statusAddOptions,
-        showReviewer: false,
         temp: {
           id: undefined,
-          importance: 1,
-          remark: '',
-          timestamp: new Date(),
-          title: '',
-          type: '',
-          status: 'published'
+          name: undefined,
+          code: undefined,
+          status: undefined,
+          createTime: new Date(),
+          lastModifyTime: new Date(),
+          memo: undefined
         },
         dialogFormVisible: false,
         dialogStatus: '',
@@ -132,14 +131,8 @@
           update: 'Edit',
           create: 'Create'
         },
-        dialogPvVisible: false,
-        pvData: [],
         rules: {
-          type: [{ required: true, message: 'type is required', trigger: 'change' }],
-          timestamp: [{ type: 'date', required: true, message: 'timestamp is required', trigger: 'change' }],
-          title: [{ required: true, message: 'title is required', trigger: 'blur' }]
-        },
-        downloadLoading: false
+        }
       }
     },
     filters: {
